@@ -15,8 +15,8 @@ info:
 
     | Endpoint | Limit |
     |----------|-------|
-    | `/moscowroleplay/erlc/server/*` (except command) | 120 requests/min |
-    | `/moscowroleplay/erlc/server/command` | Queue: 100 commands |
+    | `/erlc/server/*` (except command) | 120 requests/min |
+    | `/erlc/server/command` | Queue: 100 commands |
 
     Returns **HTTP 429** when limit is exceeded.
 
@@ -75,7 +75,7 @@ tags:
   - name: ERLC v2
     description: ER:LC v2 API game server data and management.
 paths:
-  /moscowroleplay/erlc/server:
+  /erlc/server:
     get:
       tags:
         - ERLC v2
@@ -442,7 +442,7 @@ paths:
         '400':
           $ref: '#/components/responses/PRCAPIError'
 
-  /moscowroleplay/erlc/server/command:
+  /erlc/server/command:
     post:
       tags:
         - ERLC v2

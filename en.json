@@ -44,20 +44,20 @@
               "icon": "file-code",
               "pages": [
                 {
-                  "group": "MRP ER:LC API V1",
+                  "group": "ER:LC API V1",
                   "icon": "gamepad",
                   "pages": [
-                    "en/api-reference/api-v1/mrp-erlc-api-v1/get-moscowroleplay-erlc-server-bans",
-                    "en/api-reference/api-v1/mrp-erlc-api-v1/get-moscowroleplay-erlc-server",
-                    "en/api-reference/api-v1/mrp-erlc-api-v1/get-moscowroleplay-erlc-server-players",
-                    "en/api-reference/api-v1/mrp-erlc-api-v1/get-moscowroleplay-erlc-server-joinlogs",
-                    "en/api-reference/api-v1/mrp-erlc-api-v1/get-moscowroleplay-erlc-server-queue",
-                    "en/api-reference/api-v1/mrp-erlc-api-v1/get-moscowroleplay-erlc-server-killlogs",
-                    "en/api-reference/api-v1/mrp-erlc-api-v1/get-moscowroleplay-erlc-server-commandlogs",
-                    "en/api-reference/api-v1/mrp-erlc-api-v1/get-moscowroleplay-erlc-server-modcalls",
-                    "en/api-reference/api-v1/mrp-erlc-api-v1/get-moscowroleplay-erlc-server-vehicles",
-                    "en/api-reference/api-v1/mrp-erlc-api-v1/get-moscowroleplay-erlc-server-staff",
-                    "en/api-reference/api-v1/mrp-erlc-api-v1/post-moscowroleplay-erlc-server-command"
+                    "en/api-reference/api-v1/erlc-api-v1/get-erlc-server-bans",
+                    "en/api-reference/api-v1/erlc-api-v1/get-erlc-server",
+                    "en/api-reference/api-v1/erlc-api-v1/get-erlc-server-players",
+                    "en/api-reference/api-v1/erlc-api-v1/get-erlc-server-joinlogs",
+                    "en/api-reference/api-v1/erlc-api-v1/get-erlc-server-queue",
+                    "en/api-reference/api-v1/erlc-api-v1/get-erlc-server-killlogs",
+                    "en/api-reference/api-v1/erlc-api-v1/get-erlc-server-commandlogs",
+                    "en/api-reference/api-v1/erlc-api-v1/get-erlc-server-modcalls",
+                    "en/api-reference/api-v1/erlc-api-v1/get-erlc-server-vehicles",
+                    "en/api-reference/api-v1/erlc-api-v1/get-erlc-server-staff",
+                    "en/api-reference/api-v1/erlc-api-v1/post-erlc-server-command"
                   ]
                 },
                 {
@@ -83,11 +83,11 @@
               "icon": "file-code",
               "pages": [
                 {
-                  "group": "MRP ER:LC API V2",
+                  "group": "ER:LC API V2",
                   "icon": "gamepad",
                   "pages": [
-                    "en/api-reference/api-v2/mrp-erlc-api-v2/get-moscowroleplay-erlc-server",
-                    "en/api-reference/api-v2/mrp-erlc-api-v2/post-moscowroleplay-erlc-server-command"
+                    "en/api-reference/api-v2/erlc-api-v2/get-erlc-server",
+                    "en/api-reference/api-v2/erlc-api-v2/post-erlc-server-command"
                   ]
                 },
                 {

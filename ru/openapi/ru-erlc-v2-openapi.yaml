@@ -9,7 +9,7 @@ tags:
   - name: Moscow RolePlay API ER:LC V2
     description: Данные игрового сервера ER:LC v2 API и управление им.
 paths:
-  /moscowroleplay/erlc/server:
+  /erlc/server:
     get:
       tags:
         - Moscow RolePlay API ER:LC V2
@@ -376,7 +376,7 @@ paths:
         '400':
           $ref: '#/components/responses/PRCAPIError'
 
-  /moscowroleplay/erlc/server/command:
+  /erlc/server/command:
     post:
       tags:
         - Moscow RolePlay API ER:LC V2

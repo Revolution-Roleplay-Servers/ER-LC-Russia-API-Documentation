@@ -9,7 +9,7 @@ tags:
   - name: Moscow RolePlay API ER:LC V1
     description: Данные игрового сервера ER:LC и управление им.
 paths:
-  /moscowroleplay/erlc/server:
+  /erlc/server:
     get:
       tags:
         - Moscow RolePlay API ER:LC V1
@@ -31,7 +31,7 @@ paths:
               example:
                 code: 5018
                 message: 'Endpoint устарел. Используйте более новую версию API.'
-  /moscowroleplay/erlc/server/players:
+  /erlc/server/players:
     get:
       tags:
         - Moscow RolePlay API ER:LC V1
@@ -53,7 +53,7 @@ paths:
               example:
                 code: 5018
                 message: 'Endpoint устарел. Используйте более новую версию API.'
-  /moscowroleplay/erlc/server/joinlogs:
+  /erlc/server/joinlogs:
     get:
       tags:
         - Moscow RolePlay API ER:LC V1
@@ -75,7 +75,7 @@ paths:
               example:
                 code: 5018
                 message: 'Endpoint устарел. Используйте более новую версию API.'
-  /moscowroleplay/erlc/server/queue:
+  /erlc/server/queue:
     get:
       tags:
         - Moscow RolePlay API ER:LC V1
@@ -97,7 +97,7 @@ paths:
               example:
                 code: 5018
                 message: 'Endpoint устарел. Используйте более новую версию API.'
-  /moscowroleplay/erlc/server/killlogs:
+  /erlc/server/killlogs:
     get:
       tags:
         - Moscow RolePlay API ER:LC V1
@@ -119,7 +119,7 @@ paths:
               example:
                 code: 5018
                 message: 'Endpoint устарел. Используйте более новую версию API.'
-  /moscowroleplay/erlc/server/commandlogs:
+  /erlc/server/commandlogs:
     get:
       tags:
         - Moscow RolePlay API ER:LC V1
@@ -141,7 +141,7 @@ paths:
               example:
                 code: 5018
                 message: 'Endpoint устарел. Используйте более новую версию API.'
-  /moscowroleplay/erlc/server/modcalls:
+  /erlc/server/modcalls:
     get:
       tags:
         - Moscow RolePlay API ER:LC V1
@@ -163,7 +163,7 @@ paths:
               example:
                 code: 5018
                 message: 'Endpoint устарел. Используйте более новую версию API.'
-  /moscowroleplay/erlc/server/bans:
+  /erlc/server/bans:
     get:
       tags:
         - Moscow RolePlay API ER:LC V1
@@ -194,7 +194,7 @@ paths:
           $ref: '#/components/responses/InternalServerError'
         '400':
           $ref: '#/components/responses/PRCAPIError'
-  /moscowroleplay/erlc/server/vehicles:
+  /erlc/server/vehicles:
     get:
       tags:
         - Moscow RolePlay API ER:LC V1
@@ -216,7 +216,7 @@ paths:
               example:
                 code: 5018
                 message: 'Endpoint устарел. Используйте более новую версию API.'
-  /moscowroleplay/erlc/server/staff:
+  /erlc/server/staff:
     get:
       tags:
         - Moscow RolePlay API ER:LC V1
@@ -238,7 +238,7 @@ paths:
               example:
                 code: 5018
                 message: 'Endpoint устарел. Используйте более новую версию API.'
-  /moscowroleplay/erlc/server/command:
+  /erlc/server/command:
     post:
       tags:
         - Moscow RolePlay API ER:LC V1

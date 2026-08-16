@@ -1,0 +1,45 @@
+---
+title: "Come Ottenere una Chiave API?"
+description: "Guida dettagliata per ottenere chiavi API, accesso a WebSocket e gestione dei webhook."
+---
+
+Per integrarti con i nostri servizi, avrai bisogno delle opportune chiavi di accesso e autorizzazione. Tieni presente che l'accesso all'API HTTP, ai server WebSocket e alla gestione dei webhook è separato per motivi di sicurezza.
+
+## Ottenere l'Accesso
+
+<Steps>
+  <Step title="Apertura di un Ticket">
+    Per ottenere inizialmente l'accesso all'API HTTP, al WebSocket o al sistema di gestione dei webhook, devi **aprire un ticket sul nostro server Discord**. Descrivi il tuo progetto e specifica di quali funzionalità e accessi avrai bisogno per l'implementazione.
+  </Step>
+  <Step title="Approvazione della Richiesta">
+    Attendi che l'amministrazione del progetto esamini la tua richiesta. Una volta approvata la candidatura, i relativi diritti di accesso saranno collegati al tuo account Discord.
+  </Step>
+  <Step title="Visualizzazione e Gestione delle Chiavi">
+    Una volta concessi i diritti, puoi generare, visualizzare e gestire i tuoi token direttamente all'interno del server Discord utilizzando i comandi slash.
+  </Step>
+</Steps>
+
+## Tipi di Chiavi Disponibili e Comandi
+
+### 1. Chiave API HTTP
+Il token principale utilizzato per inviare richieste HTTP standard ai nostri endpoint. Viene passato nell'header `Authorization`.
+* **Comando di visualizzazione:** `/api view`
+
+### 2. Chiave WebSocket
+Per lavorare con eventi in tempo reale, viene utilizzata una **chiave separata e indipendente**. Non tentare di utilizzare il token HTTP standard per connetterti ai socket: il server lo rifiuterà.
+* **Comando di visualizzazione:** `/websocket view`
+<Danger>
+  **Mantieni sempre segrete le tue chiavi. Le chiavi WebSocket e API HTTP sono completamente autonome e gestite indipendentemente l'una dall'altra.**
+</Danger>
+
+## Gestione dei Webhook
+
+Se il tuo servizio deve ricevere notifiche automatiche sugli eventi del server, puoi configurare i webhook.
+
+L'accesso al pannello di gestione dei webhook viene concesso **esclusivamente tramite ticket** con l'amministrazione del progetto. Una volta collegati i diritti al tuo account, sarà disponibile uno speciale comando di configurazione:
+
+* **Comando di gestione:** `/webhook manage`
+
+<Tip>
+  **Utilizzando questo comando, il bot aprirà un pratico menu in cui potrai associare, rimuovere e visualizzare gli URL attivi per l'invio dei webhook.**
+</Tip>

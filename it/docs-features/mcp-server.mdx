@@ -1,0 +1,87 @@
+---
+title: "Server MCP"
+description: "Collega gli assistenti IA alla documentazione dell'API di ER:LC Russia tramite Model Context Protocol per ricerca e analisi in tempo reale."
+---
+
+## Endpoint
+
+```text
+https://apidocs.erlcrussia.com/mcp
+```
+
+## Cos'è MCP?
+
+Model Context Protocol (MCP) è uno standard aperto che consente agli assistenti IA di connettersi a origini dati e strumenti esterni. Configurando un client compatibile con MCP verso il nostro server, il tuo assistente IA può cercare, recuperare e analizzare le informazioni della documentazione dell'API di ER:LC Russia in tempo reale.
+
+<Tip>
+  **Il server MCP fornisce l'accesso a documentazione aggiornata senza la necessità di copiare e incollare manualmente i contenuti nella chat del tuo assistente IA.**
+</Tip>
+
+## Configurazione
+
+### Claude Desktop
+
+Aggiungi quanto segue al tuo file `claude_desktop_config.json`:
+
+```json
+{
+  "mcpServers": {
+    "erlcrussia-api-docs": {
+      "url": "https://apidocs.erlcrussia.com/mcp"
+    }
+  }
+}
+```
+
+### Cursor
+
+Aggiungi il server nelle impostazioni MCP di Cursor:
+
+```json
+{
+  "mcpServers": {
+    "erlcrussia-api-docs": {
+      "url": "https://apidocs.erlcrussia.com/mcp"
+    }
+  }
+}
+```
+
+### OpenCode
+
+Aggiungi il server nelle impostazioni MCP di OpenCode:
+
+```json
+{
+  "$schema": "https://opencode.ai/config.json",
+  "mcp": {
+    "erlcrussia-api-docs": {
+      "type": "remote",
+      "url": "https://apidocs.erlcrussia.com/mcp",
+      "enabled": true
+    }
+  }
+}
+```
+
+### Altri Client
+
+Qualsiasi client che supporti server MCP remoti può essere indirizzato all'URL sopra indicato. Consulta la documentazione del tuo client per il formato esatto di configurazione.
+
+## Strumenti Disponibili
+
+Una volta connesso, il tuo client avrà accesso a strumenti per:
+
+* **Cercare** nella documentazione per parole chiave o argomenti
+* **Recuperare** pagine e sezioni specifiche
+* **Esplorare** la struttura della documentazione
+
+## Perché Usarlo?
+
+* Poni domande al tuo assistente IA sull'API di ER:LC Russia e ricevi risposte basate sulla documentazione più aggiornata
+* Evita allucinazioni o informazioni obsolete
+* Crea agenti e flussi di lavoro che rimangono automaticamente sincronizzati con le modifiche alla documentazione
+
+<Note>
+  **Il server MCP fornisce accesso esclusivamente alla documentazione pubblica. Per ottenere una chiave API e utilizzare gli endpoint, apri un ticket sul nostro server Discord.**
+</Note>

@@ -21,6 +21,15 @@
       },
       {
         "$ref": "./en.json"
+      },
+      {
+        "$ref": "./uk.json"
+      },
+      {
+        "$ref": "./es.json"
+      },
+      {
+        "$ref": "./it.json"
       }
     ]
   },

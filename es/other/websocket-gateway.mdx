@@ -1,0 +1,473 @@
+---
+title: "WebSocket Gateway"
+---
+
+El WebSocket Gateway te permite recibir datos del servidor de ER:LC en tiempo real sin necesidad de consultar continuamente la API REST. Al conectarte al gateway, puedes suscribirte a los canales de datos que te interesen y recibir actualizaciones automáticamente.
+
+### Conexión
+
+**URL:** `wss://api.erlcrussia.com/v2/gateway`
+
+Al conectarse al endpoint HTTP (no WebSocket), se devuelve un error `426` con código `5020`.
+
+## Inicio Rápido
+
+```js
+const ws = new WebSocket('wss://api.erlcrussia.com/v2/gateway');
+
+ws.on('open', () => {
+  console.log('Conectado al Gateway');
+});
+
+ws.on('message', (data) => {
+  const message = JSON.parse(data.toString());
+  console.log('Recibido:', message);
+});
+```
+
+## Ciclo de Vida de la Conexión
+
+1. **Conectar** — establecer una conexión WebSocket
+2. **Autenticar** — enviar `auth` con tu token
+3. **Suscribirse** — suscribirse a los canales deseados mediante `subscribe`
+4. **Recibir Datos** — obtener actualizaciones en tiempo real
+5. **Cancelar Suscripción** — desuscribirse de canales mediante `unsubscribe`
+6. **Desconectar** — cerrar la conexión
+
+---
+
+## Mensajes del Cliente
+
+Todos los mensajes se envían en formato JSON con un campo `action`.
+
+### Autenticación
+
+El primer mensaje que debe enviarse tras conectarse. Sin autenticación, todas las demás acciones serán rechazadas.
+
+```json
+{
+  "action": "auth",
+  "token": "tu_clave_ws"
+}
+```
+
+### Respuesta Exitosa
+
+```json
+{
+  "code": 5128,
+  "discord_id": "123456789",
+  "timestamp": 1747267200000
+}
+```
+
+Tras una autenticación exitosa, se envía automáticamente una instantánea (snapshot) de la caché (si está disponible).
+
+---
+
+## Suscripción a Canales
+
+Suscríbete a uno o más canales de datos.
+
+```json
+{
+  "action": "subscribe",
+  "channels": ["Server", "Players", "Queue"]
+}
+```
+
+También se admite un solo canal a través del campo `channel`:
+
+```json
+{
+  "action": "subscribe",
+  "channel": "Staff"
+}
+```
+
+### Respuesta
+
+```json
+{
+  "code": 5131,
+  "channels": ["Staff"]
+}
+```
+
+### Suscripción Denegada
+
+Si no tienes acceso a un canal específico:
+
+```json
+{
+  "code": 5130,
+  "channel": "Staff",
+  "message": "Access to channel \"Staff\" is forbidden"
+}
+```
+
+---
+
+## Cancelación de Suscripción a Canales
+
+Cancela la suscripción a los canales que ya no necesites.
+
+```json
+{
+  "action": "unsubscribe",
+  "channels": ["Queue", "KillLogs"]
+}
+```
+
+### Respuesta
+
+```json
+{
+  "code": 5132,
+  "channels": ["Queue", "KillLogs"]
+}
+```
+
+---
+
+## Obtención de Caché
+
+Solicita la instantánea actual de la caché para tus suscripciones.
+
+```json
+{
+  "action": "get_cache"
+}
+```
+
+Devuelve datos únicamente para los canales a los que estás suscrito.
+
+---
+
+## Ping
+
+Comprobación de la conexión.
+
+```json
+{
+  "action": "ping"
+}
+```
+
+### Respuesta
+
+```json
+{
+  "code": 5129,
+  "timestamp": 1747267200000
+}
+```
+
+---
+
+## Canales de Datos
+
+| Canal | Descripción |
+| --- | --- |
+| `Server` | Información del servidor: nombre, propietario, jugadores, clave de acceso |
+| `Players` | Lista de jugadores en el servidor |
+| `Staff` | Lista del personal del servidor |
+| `Queue` | Datos de la cola |
+| `JoinLogs` | Registros de entrada/salida de jugadores |
+| `KillLogs` | Registros de asesinatos |
+| `CommandLogs` | Registros de comandos |
+| `ModCalls` | Llamadas a moderadores |
+| `EmergencyCalls` | Llamadas de emergencia |
+| `Vehicles` | Información de vehículos |
+
+---
+
+## Estructura de Datos de los Canales
+
+### `Server`
+
+```json
+{
+  "Name": "MRP | ER:LC Russia",
+  "OwnerId": "123456789",
+  "CoOwnerIds": ["987654321"],
+  "CurrentPlayers": 42,
+  "MaxPlayers": 100,
+  "JoinKey": "abc123",
+  "AccVerifiedReq": true,
+  "TeamBalance": false
+}
+```
+
+### `Players`
+
+```json
+{
+  "Players": [
+    {
+      "Name": "PlayerName",
+      "RoleId": 1,
+      "Team": "Police"
+    }
+  ]
+}
+```
+
+### `Staff`
+
+```json
+{
+  "Staff": [
+    {
+      "Name": "AdminName",
+      "Role": "Administrator",
+      "DiscordId": "123456789"
+    }
+  ]
+}
+```
+
+### `Queue`
+
+```json
+{
+  "Queue": [
+    {
+      "Name": "WaitingPlayer",
+      "Position": 1
+    }
+  ]
+}
+```
+
+### `JoinLogs`
+
+```json
+{
+  "JoinLogs": [
+    {
+      "PlayerName": "PlayerName",
+      "Action": "join",
+      "Timestamp": 1747267200000
+    }
+  ]
+}
+```
+
+### `KillLogs`
+
+```json
+{
+  "KillLogs": [
+    {
+      "Killer": "Player1",
+      "Victim": "Player2",
+      "Timestamp": 1747267200000
+    }
+  ]
+}
+```
+
+### `CommandLogs`
+
+```json
+{
+  "CommandLogs": [
+    {
+      "PlayerName": "PlayerName",
+      "Command": ":kill Player2",
+      "Timestamp": 1747267200000
+    }
+  ]
+}
+```
+
+### `ModCalls`
+
+```json
+{
+  "ModCalls": [
+    {
+      "Caller": "PlayerName",
+      "Reason": "Rule violation",
+      "Timestamp": 1747267200000
+    }
+  ]
+}
+```
+
+### `EmergencyCalls`
+
+```json
+{
+  "EmergencyCalls": [
+    {
+      "Caller": "PlayerName",
+      "Type": "emergency",
+      "Timestamp": 1747267200000
+    }
+  ]
+}
+```
+
+### `Vehicles`
+
+```json
+{
+  "Vehicles": [
+    {
+      "Name": "Police Car",
+      "Position": { "x": 0, "y": 0, "z": 0 }
+    }
+  ]
+}
+```
+
+---
+
+## Mensajes del Servidor
+
+### Evento de Conexión
+
+Enviado inmediatamente después de establecer la conexión:
+
+```json
+{
+  "code": 5127,
+  "clientId": "192.168.1.1-1747267200000",
+  "timestamp": 1747267200000
+}
+```
+
+### Actualización de Caché
+
+Cuando los datos del servidor cambian, se envía una instantánea actualizada a todos los clientes suscritos:
+
+```json
+{
+  "Name": "MRP | ER:LC Russia",
+  "CurrentPlayers": 43,
+  "Players": [...],
+  "Queue": [...]
+}
+```
+
+> Los datos se devuelven únicamente para los canales a los que el cliente está suscrito.
+
+### Caché Vacía
+
+Si la caché no está disponible:
+
+```json
+{
+  "code": 5133,
+  "timestamp": 1747267200000
+}
+```
+
+### Instantánea Vacía
+
+Si la caché existe pero no hay datos para tus suscripciones:
+
+```json
+{
+  "code": 5134,
+  "timestamp": 1747267200000
+}
+```
+
+### Error
+
+```json
+{
+  "code": 5101,
+  "message": "Unknown action: invalid_action"
+}
+```
+
+---
+
+## Keep-Alive
+
+El servidor envía un `ping` de WebSocket cada **30 segundos**. El cliente debe responder con `pong`. Si el cliente no responde, se cerrará la conexión.
+
+Para la comprobación manual de la conexión, utiliza la acción `ping`:
+
+```json
+{
+  "action": "ping"
+}
+```
+
+---
+
+## Ejemplo Completo
+
+```js
+const WebSocket = require('ws');
+
+const ws = new WebSocket('wss://api.erlcrussia.com/v2/gateway');
+
+ws.on('open', () => {
+  // 1. Autenticación
+  ws.send(JSON.stringify({
+    action: 'auth',
+    token: 'tu_clave_ws_aqui'
+  }));
+});
+
+ws.on('message', (data) => {
+  const msg = JSON.parse(data.toString());
+
+  switch (msg.code) {
+    case 5127:
+      console.log('Conectado, clientId:', msg.clientId);
+      break;
+
+    case 5128:
+      console.log('Autenticación exitosa');
+      // 2. Suscribirse a canales
+      ws.send(JSON.stringify({
+        action: 'subscribe',
+        channels: ['Server', 'Players', 'Queue', 'JoinLogs']
+      }));
+      break;
+
+    case 5131:
+      console.log('Suscripciones:', msg.channels);
+      break;
+
+    case 5130:
+      console.warn('Canal denegado:', msg.channel);
+      break;
+
+    case 5133:
+      console.log('Caché vacía');
+      break;
+
+    case 5129:
+      // pong
+      break;
+
+    default:
+      if (msg.code >= 5100) {
+        console.error('Error:', msg.code, msg.message);
+        break;
+      }
+      // Actualización de datos
+      if (msg.Name) console.log('Servidor:', msg.Name, 'Jugadores:', msg.CurrentPlayers);
+      if (msg.Players) console.log('Jugadores:', msg.Players.length);
+      if (msg.Queue) console.log('Cola:', msg.Queue.length);
+      if (msg.JoinLogs) console.log('Registro de entrada:', msg.JoinLogs);
+      break;
+  }
+});
+
+ws.on('close', () => {
+  console.log('Conexión cerrada');
+});
+
+ws.on('error', (err) => {
+  console.error('Error de conexión:', err.message);
+});
+```

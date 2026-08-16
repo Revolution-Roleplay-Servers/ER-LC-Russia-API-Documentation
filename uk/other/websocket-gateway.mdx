@@ -1,0 +1,473 @@
+---
+title: "WebSocket Gateway"
+---
+
+WebSocket Gateway дозволяє отримувати дані сервера ER:LC у реальному часі без необхідності постійно опитувати REST API. Підключившись до шлюзу, ви можете підписатися на потрібні канали даних та отримувати оновлення автоматично.
+
+### Підключення
+
+**URL:** `wss://api.erlcrussia.com/v2/gateway`
+
+При підключенні до HTTP ендпоінта (не WebSocket) повертається помилка `426` з кодом `5020`.
+
+## Швидкий Старт
+
+```js
+const ws = new WebSocket('wss://api.erlcrussia.com/v2/gateway');
+
+ws.on('open', () => {
+  console.log('Підключено до Gateway');
+});
+
+ws.on('message', (data) => {
+  const message = JSON.parse(data.toString());
+  console.log('Отримано:', message);
+});
+```
+
+## Життєвий Цикл Підключення
+
+1. **Підключення** — встановіть WebSocket з'єднання
+2. **Автентифікація** — надішліть `auth` з вашим токеном
+3. **Підписка** — підпишіться на потрібні канали через `subscribe`
+4. **Отримання даних** — отримуйте оновлення в реальному часі
+5. **Відписка** — відпишіться від каналів через `unsubscribe`
+6. **Відключення** — закрийте з'єднання
+
+---
+
+## Повідомлення Клієнта
+
+Усі повідомлення надсилаються у форматі JSON із полем `action`.
+
+### Автентифікація
+
+Перше повідомлення, яке необхідно надіслати після підключення. Без автентифікації всі інші дії будуть відхилені.
+
+```json
+{
+  "action": "auth",
+  "token": "ваш_ws_ключ"
+}
+```
+
+### Відповідь При Успіху
+
+```json
+{
+  "code": 5128,
+  "discord_id": "123456789",
+  "timestamp": 1747267200000
+}
+```
+
+Після успішної автентифікації автоматично надсилається знімок кешу (якщо доступний).
+
+---
+
+## Підписка На Канали
+
+Підпишіться на один або кілька каналів даних.
+
+```json
+{
+  "action": "subscribe",
+  "channels": ["Server", "Players", "Queue"]
+}
+```
+
+Також підтримується одиночний канал через поле `channel`:
+
+```json
+{
+  "action": "subscribe",
+  "channel": "Staff"
+}
+```
+
+### Відповідь
+
+```json
+{
+  "code": 5131,
+  "channels": ["Staff"]
+}
+```
+
+### Відмова в Підписці
+
+Якщо у вас немає прав на певний канал:
+
+```json
+{
+  "code": 5130,
+  "channel": "Staff",
+  "message": "Access to channel \"Staff\" is forbidden"
+}
+```
+
+---
+
+## Відписка Від Каналів
+
+Відпишіться від каналів, які більше не потрібні.
+
+```json
+{
+  "action": "unsubscribe",
+  "channels": ["Queue", "KillLogs"]
+}
+```
+
+### Відповідь
+
+```json
+{
+  "code": 5132,
+  "channels": ["Queue", "KillLogs"]
+}
+```
+
+---
+
+## Отримання Кешу
+
+Запитайте поточний знімок кешу для ваших підписок.
+
+```json
+{
+  "action": "get_cache"
+}
+```
+
+Повертає дані лише для каналів, на які ви підписані.
+
+---
+
+## Ping
+
+Перевірка з'єднання.
+
+```json
+{
+  "action": "ping"
+}
+```
+
+### Відповідь
+
+```json
+{
+  "code": 5129,
+  "timestamp": 1747267200000
+}
+```
+
+---
+
+## Канали Даних
+
+| Канал | Опис |
+| --- | --- |
+| `Server` | Інформація про сервер: назва, власник, гравці, ключ підключення |
+| `Players` | Список гравців на сервері |
+| `Staff` | Список персоналу сервера |
+| `Queue` | Дані черги очікування |
+| `JoinLogs` | Логи входів/виходів гравців |
+| `KillLogs` | Логи вбивств |
+| `CommandLogs` | Логи команд |
+| `ModCalls` | Модераційні виклики |
+| `EmergencyCalls` | Екстрені виклики |
+| `Vehicles` | Інформація про транспорт |
+
+---
+
+## Структура Даних Каналів
+
+### `Server`
+
+```json
+{
+  "Name": "MRP | ER:LC Russia",
+  "OwnerId": "123456789",
+  "CoOwnerIds": ["987654321"],
+  "CurrentPlayers": 42,
+  "MaxPlayers": 100,
+  "JoinKey": "abc123",
+  "AccVerifiedReq": true,
+  "TeamBalance": false
+}
+```
+
+### `Players`
+
+```json
+{
+  "Players": [
+    {
+      "Name": "PlayerName",
+      "RoleId": 1,
+      "Team": "Police"
+    }
+  ]
+}
+```
+
+### `Staff`
+
+```json
+{
+  "Staff": [
+    {
+      "Name": "AdminName",
+      "Role": "Administrator",
+      "DiscordId": "123456789"
+    }
+  ]
+}
+```
+
+### `Queue`
+
+```json
+{
+  "Queue": [
+    {
+      "Name": "WaitingPlayer",
+      "Position": 1
+    }
+  ]
+}
+```
+
+### `JoinLogs`
+
+```json
+{
+  "JoinLogs": [
+    {
+      "PlayerName": "PlayerName",
+      "Action": "join",
+      "Timestamp": 1747267200000
+    }
+  ]
+}
+```
+
+### `KillLogs`
+
+```json
+{
+  "KillLogs": [
+    {
+      "Killer": "Player1",
+      "Victim": "Player2",
+      "Timestamp": 1747267200000
+    }
+  ]
+}
+```
+
+### `CommandLogs`
+
+```json
+{
+  "CommandLogs": [
+    {
+      "PlayerName": "PlayerName",
+      "Command": ":kill Player2",
+      "Timestamp": 1747267200000
+    }
+  ]
+}
+```
+
+### `ModCalls`
+
+```json
+{
+  "ModCalls": [
+    {
+      "Caller": "PlayerName",
+      "Reason": "Порушення правил",
+      "Timestamp": 1747267200000
+    }
+  ]
+}
+```
+
+### `EmergencyCalls`
+
+```json
+{
+  "EmergencyCalls": [
+    {
+      "Caller": "PlayerName",
+      "Type": "emergency",
+      "Timestamp": 1747267200000
+    }
+  ]
+}
+```
+
+### `Vehicles`
+
+```json
+{
+  "Vehicles": [
+    {
+      "Name": "Police Car",
+      "Position": { "x": 0, "y": 0, "z": 0 }
+    }
+  ]
+}
+```
+
+---
+
+## Повідомлення Сервера
+
+### Подія Підключення
+
+Надсилається одразу після встановлення з'єднання:
+
+```json
+{
+  "code": 5127,
+  "clientId": "192.168.1.1-1747267200000",
+  "timestamp": 1747267200000
+}
+```
+
+### Оновлення Кешу
+
+При зміні даних сервера всім підписаним клієнтам надсилається оновлений знімок:
+
+```json
+{
+  "Name": "MRP | ER:LC Russia",
+  "CurrentPlayers": 43,
+  "Players": [...],
+  "Queue": [...]
+}
+```
+
+> Дані повертаються тільки для каналів, на які підписаний клієнт.
+
+### Порожній Кеш
+
+Якщо кеш недоступний:
+
+```json
+{
+  "code": 5133,
+  "timestamp": 1747267200000
+}
+```
+
+### Порожній Знімок
+
+Якщо кеш є, але немає даних для ваших підписок:
+
+```json
+{
+  "code": 5134,
+  "timestamp": 1747267200000
+}
+```
+
+### Помилка
+
+```json
+{
+  "code": 5101,
+  "message": "Unknown action: invalid_action"
+}
+```
+
+---
+
+## Keep-Alive
+
+Сервер надсилає WebSocket `ping` кожні **30 секунд**. Клієнт повинен відповідати `pong`. Якщо клієнт не відповідає, з'єднання буде закрито.
+
+Для ручної перевірки з'єднання використовуйте дію `ping`:
+
+```json
+{
+  "action": "ping"
+}
+```
+
+---
+
+## Повний Приклад
+
+```js
+const WebSocket = require('ws');
+
+const ws = new WebSocket('wss://api.erlcrussia.com/v2/gateway');
+
+ws.on('open', () => {
+  // 1. Автентифікація
+  ws.send(JSON.stringify({
+    action: 'auth',
+    token: 'your_ws_key_here'
+  }));
+});
+
+ws.on('message', (data) => {
+  const msg = JSON.parse(data.toString());
+
+  switch (msg.code) {
+    case 5127:
+      console.log('Підключено, clientId:', msg.clientId);
+      break;
+
+    case 5128:
+      console.log('Автентифікація успішна');
+      // 2. Підписка на канали
+      ws.send(JSON.stringify({
+        action: 'subscribe',
+        channels: ['Server', 'Players', 'Queue', 'JoinLogs']
+      }));
+      break;
+
+    case 5131:
+      console.log('Підписки:', msg.channels);
+      break;
+
+    case 5130:
+      console.warn('Відмовлено в каналі:', msg.channel);
+      break;
+
+    case 5133:
+      console.log('Кеш порожній');
+      break;
+
+    case 5129:
+      // pong
+      break;
+
+    default:
+      if (msg.code >= 5100) {
+        console.error('Помилка:', msg.code, msg.message);
+        break;
+      }
+      // Оновлення даних
+      if (msg.Name) console.log('Сервер:', msg.Name, 'Гравців:', msg.CurrentPlayers);
+      if (msg.Players) console.log('Гравці:', msg.Players.length);
+      if (msg.Queue) console.log('Черга:', msg.Queue.length);
+      if (msg.JoinLogs) console.log('Лог входу:', msg.JoinLogs);
+      break;
+  }
+});
+
+ws.on('close', () => {
+  console.log('З\'єднання закрито');
+});
+
+ws.on('error', (err) => {
+  console.error('Помилка з\'єднання:', err.message);
+});
+```

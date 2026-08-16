@@ -1,0 +1,807 @@
+/* ==========================================================================
+   ER:LC Russia API Documentation - Global & Custom Styles
+   ========================================================================== */
+
+/* ============================================
+   КНОПКА CTA / ВОЙТИ В ВЕРХНЕЙ ПАНЕЛИ
+   (Дизайн как на основном сайте, высота 38px)
+   ============================================ */
+
+@media (min-width: 1024px) {
+  #topbar-cta-button:not(.is-authenticated) {
+    background: transparent !important;
+    background-color: transparent !important;
+    background-image: none !important;
+    border: 1px solid #02B1DA !important;
+    border-radius: 12px !important;
+    padding: 0 1.6rem !important;
+    height: 38px !important;
+    box-sizing: border-box !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    cursor: pointer !important;
+    transition: all 0.15s ease !important;
+    box-shadow: none !important;
+    outline: none !important;
+    text-decoration: none !important;
+    white-space: nowrap !important;
+    font-weight: 700 !important;
+    font-size: 0.9rem !important;
+    color: #000000 !important;
+    overflow: visible !important;
+  }
+
+  #topbar-cta-button:not(.is-authenticated)::before,
+  #topbar-cta-button:not(.is-authenticated)::after,
+  #topbar-cta-button:not(.is-authenticated) *::before,
+  #topbar-cta-button:not(.is-authenticated) *::after {
+    display: none !important;
+    content: none !important;
+    background: transparent !important;
+  }
+
+  #topbar-cta-button:not(.is-authenticated) svg,
+  #topbar-cta-button:not(.is-authenticated) img {
+    display: none !important;
+  }
+
+  #topbar-cta-button:not(.is-authenticated) * {
+    background: transparent !important;
+    background-color: transparent !important;
+    background-image: none !important;
+    box-shadow: none !important;
+    outline: none !important;
+    border: none !important;
+  }
+
+  #topbar-cta-button:not(.is-authenticated) a {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    text-decoration: none !important;
+    color: inherit !important;
+    background: transparent !important;
+  }
+
+  #topbar-cta-button:not(.is-authenticated) div,
+  #topbar-cta-button:not(.is-authenticated) span {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 100% !important;
+    height: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    font-weight: 700 !important;
+    font-size: 0.9rem !important;
+    color: inherit !important;
+    background: transparent !important;
+  }
+
+  /* Светлая тема (текст черный) */
+  #topbar-cta-button:not(.is-authenticated),
+  #topbar-cta-button:not(.is-authenticated) span,
+  #topbar-cta-button:not(.is-authenticated) a {
+    color: #000000 !important;
+    font-weight: 700 !important;
+    font-size: 0.9rem !important;
+  }
+
+  /* Темная тема (текст белый) */
+  .dark #topbar-cta-button:not(.is-authenticated),
+  .dark #topbar-cta-button:not(.is-authenticated) span,
+  .dark #topbar-cta-button:not(.is-authenticated) a {
+    color: #ffffff !important;
+  }
+
+  /* Hover: синий фон #02B1DA, белый текст на любой теме */
+  #topbar-cta-button:not(.is-authenticated):hover,
+  .dark #topbar-cta-button:not(.is-authenticated):hover {
+    background: #02B1DA !important;
+    background-color: #02B1DA !important;
+    border-color: #02B1DA !important;
+    color: #ffffff !important;
+  }
+
+  #topbar-cta-button:not(.is-authenticated):hover span,
+  #topbar-cta-button:not(.is-authenticated):hover a,
+  .dark #topbar-cta-button:not(.is-authenticated):hover span,
+  .dark #topbar-cta-button:not(.is-authenticated):hover a {
+    color: #ffffff !important;
+    background: transparent !important;
+  }
+
+  /* Active: нажатие вниз на 2px */
+  #topbar-cta-button:not(.is-authenticated):active {
+    transform: translateY(2px) !important;
+  }
+}
+
+/* ============================================
+   ФУТЕР - ИКОНКА TIKTOK
+   ============================================ */
+
+footer a[href*="tiktok"] svg {
+  display: none !important;
+}
+
+footer a[href*="tiktok"] {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  width: 20px !important;
+  height: 20px !important;
+  vertical-align: middle;
+  position: relative;
+}
+
+footer a[href*="tiktok"]::before {
+  content: "";
+  display: block;
+  width: 20px;
+  height: 20px;
+  background-color: rgb(112, 117, 118);
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z'/%3E%3C/svg%3E") no-repeat center;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z'/%3E%3C/svg%3E") no-repeat center;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  transition: background-color 0.2s ease;
+}
+
+.dark footer a[href*="tiktok"]::before {
+  background-color: rgb(80, 85, 86);
+}
+
+footer a[href*="tiktok"]:hover::before {
+  background-color: rgb(80, 85, 86) !important;
+}
+
+.dark footer a[href*="tiktok"]:hover::before {
+  background-color: rgb(112, 117, 118) !important;
+}
+
+/* ============================================
+   ФУТЕР - ИКОНКА ROBLOX
+   ============================================ */
+
+footer a[href*="roblox"] svg {
+  display: none !important;
+}
+
+footer a[href*="roblox"] {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  width: 20px !important;
+  height: 20px !important;
+  vertical-align: middle;
+  position: relative;
+}
+
+footer a[href*="roblox"]::before {
+  content: "";
+  display: block;
+  width: 18px;
+  height: 18px;
+  transform: translateY(0.4px);
+  background-color: rgb(112, 117, 118);
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3.38116 0L0 12.6188L12.6188 16L16 3.38116L3.38116 0ZM9.291 10.2363L5.76484 9.291L6.71013 5.76484L10.2377 6.71013L9.291 10.2363Z'/%3E%3C/svg%3E") no-repeat center;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3.38116 0L0 12.6188L12.6188 16L16 3.38116L3.38116 0ZM9.291 10.2363L5.76484 9.291L6.71013 5.76484L10.2377 6.71013L9.291 10.2363Z'/%3E%3C/svg%3E") no-repeat center;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  transition: background-color 0.2s ease;
+}
+
+.dark footer a[href*="roblox"]::before {
+  background-color: rgb(80, 85, 86);
+}
+
+footer a[href*="roblox"]:hover::before {
+  background-color: rgb(80, 85, 86) !important;
+}
+
+.dark footer a[href*="roblox"]:hover::before {
+  background-color: rgb(112, 117, 118) !important;
+}
+
+/* ============================================
+   НАВБАР - ССЫЛКА DISCORD (ТОЛЬКО ДЕСКТОП 1024px+)
+   ============================================ */
+
+@media (min-width: 1024px) {
+  header a[href*="erlcrussia.com/discord"] {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    height: 38px !important;
+    box-sizing: border-box !important;
+    color: rgb(80, 83, 81) !important;
+    font-weight: 600 !important;
+    text-decoration: none !important;
+    padding: 0 16px !important;
+    border-radius: 12px !important;
+    transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease, transform 0.15s ease !important;
+    background: transparent !important;
+    border: 1px solid rgba(10, 13, 12, 0.1) !important;
+    /* Двигать кнопку Поддержки по горизонтали (X) и вертикали (Y) */
+    transform: translateX(12px) translateY(0px) !important;
+  }
+
+  header a[href*="erlcrussia.com/discord"]:hover {
+    background: rgba(3, 7, 18, 0.04) !important;
+    border-color: rgba(10, 13, 12, 0.1) !important;
+    color: rgba(23, 26, 24) !important;
+  }
+
+  .dark header a[href*="erlcrussia.com/discord"] {
+    color: rgb(206, 209, 207) !important;
+    border-color: rgba(255, 255, 255, 0.1) !important;
+  }
+
+  .dark header a[href*="erlcrussia.com/discord"]:hover {
+    background: rgba(255, 255, 255, 0.05) !important;
+    border-color: rgba(255, 255, 255, 0.1) !important;
+    color: rgb(243, 244, 246) !important;
+  }
+
+  header a[href*="erlcrussia.com/discord"]:active {
+    transform: translateX(12px) translateY(2px) !important;
+    background: rgba(255, 255, 255, 0.08) !important;
+  }
+}
+
+/* ============================================
+   КНОПКА ПОИСКА - АНИМАЦИЯ НАЖАТИЯ
+   ============================================ */
+
+#search-bar-entry,
+button#search-bar-entry,
+#navbar button[aria-label*="Search" i],
+#navbar button[aria-label*="Поиск" i],
+#navbar button[aria-label*="Пошук" i],
+#navbar button[aria-label*="Buscar" i],
+#navbar button[aria-label*="Cerca" i],
+#navbar button:has(svg) {
+  transition: transform 0.15s ease, background-color 0.15s ease !important;
+}
+
+#search-bar-entry:active,
+button#search-bar-entry:active,
+#navbar button[aria-label*="Search" i]:active,
+#navbar button[aria-label*="Поиск" i]:active,
+#navbar button[aria-label*="Пошук" i]:active,
+#navbar button[aria-label*="Buscar" i]:active,
+#navbar button[aria-label*="Cerca" i]:active {
+  transform: translateY(2px) !important;
+}
+
+/* ============================================
+   СТИЛИ ЛОГОТИПА
+   ============================================ */
+
+#navbar .nav-logo[src*="Banner-ERLC-Russia-Docs-System.svg"] {
+  height: 60px !important;
+  width: 200px !important;
+  max-height: none !important;
+  object-fit: contain !important;
+  transform: translateX(-10px) !important;
+}
+
+footer img[src*="Banner-ERLC-Russia-Docs-System.svg"] {
+  height: 60px !important;
+  width: 192px !important;
+  max-height: none !important;
+  object-fit: contain !important;
+  transform: translate(-10px, -12px) !important;
+}
+
+/* ============================================
+   ПОРЯДОК ЭЛЕМЕНТОВ В ШАПКЕ
+   (Кнопка выбора темы ПЕРЕД кнопкой Поддержки)
+   ============================================ */
+
+@media (min-width: 1024px) {
+
+  header div:has(> #theme-preference-menu-trigger),
+  header [data-component-name="theme-preference-menu"],
+  header #theme-preference-menu-trigger,
+  header .theme-preference-menu-trigger {
+    order: 1 !important;
+  }
+
+  header nav:has(a[href*="erlcrussia.com/discord"]),
+  header div:has(> a[href*="erlcrussia.com/discord"]),
+  header a[href*="erlcrussia.com/discord"] {
+    order: 2 !important;
+  }
+
+  #topbar-cta-button,
+  header div:has(> #topbar-cta-button) {
+    order: 3 !important;
+  }
+}
+
+/* ============================================
+   ПЕРЕКЛЮЧАТЕЛЬ ТЕМЫ
+   ============================================ */
+
+
+#theme-preference-menu-trigger,
+button#theme-preference-menu-trigger {
+  width: 38px !important;
+  height: 38px !important;
+  border-radius: 12px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  cursor: pointer !important;
+  background: transparent !important;
+  border: 1px solid transparent !important;
+  transition: transform 0.15s ease, background-color 0.15s ease, border-color 0.15s ease !important;
+  /* Двигать кнопку выбора темы по горизонтали (X) и вертикали (Y) */
+  transform: translateX(0px) translateY(0px) !important;
+}
+
+#theme-preference-menu-trigger:hover,
+button#theme-preference-menu-trigger:hover {
+  background: rgba(3, 7, 18, 0.05) !important;
+  border-color: rgba(10, 13, 12, 0.1) !important;
+}
+
+.dark #theme-preference-menu-trigger:hover,
+.dark button#theme-preference-menu-trigger:hover {
+  background: rgba(255, 255, 255, 0.05) !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+#theme-preference-menu-trigger:active,
+button#theme-preference-menu-trigger:active,
+#theme-preference-menu-trigger.is-active-pressed,
+button#theme-preference-menu-trigger.is-active-pressed {
+  transform: translateX(0px) translateY(2px) !important;
+}
+
+/* ============================================
+   СКРЫТЬ ВЫБОР ТЕМЫ В ФУТЕРЕ И САЙДБАРЕ
+   ============================================ */
+
+footer [data-testid*="mode-switch"],
+footer [data-component-name="theme-preference-menu"],
+footer #theme-preference-menu-trigger,
+footer .theme-preference-menu-trigger,
+footer div:has(> #theme-preference-menu-trigger),
+footer div:has(> button[aria-label*="theme" i]),
+footer div:has(> button[aria-label*="тем" i]),
+footer div:has(> button[aria-label*="теми" i]),
+footer div:has(> button[aria-label*="tema" i]),
+[data-testid*="mode-switch"] {
+  display: none !important;
+}
+
+/* ============================================
+   ФУТЕР - ПОЗИЦИЯ СОЦСЕТЕЙ
+   ============================================ */
+
+@media (min-width: 1024px) {
+  footer div.flex-wrap:has(a[href*="erlcrussia.com/discord"]) {
+    position: relative !important;
+    left: 720px !important;
+    top: 114px !important;
+  }
+}
+
+/* ============================================
+   ДИСКОРД АНЧОР В САЙДБАРЕ (ОБВОДКА И СТИЛЬ КАРТОЧКИ)
+   (Строго для erlcrussia.com/discord, не затрагивая страницы правил)
+   ============================================ */
+
+#sidebar a.nav-anchor[href*="erlcrussia.com/discord"],
+#sidebar a[href*="erlcrussia.com/discord"] {
+  display: flex !important;
+  align-items: center !important;
+  width: 100% !important;
+  min-height: 42px !important;
+  height: 42px !important;
+  box-sizing: border-box !important;
+  padding: 0 18px !important;
+  border-radius: 12px !important;
+  text-decoration: none !important;
+  transition: all 0.15s ease !important;
+  background: transparent !important;
+  border: 1px solid rgba(10, 13, 12, 0.12) !important;
+  margin: 6px 0 14px 0 !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+#sidebar a[href*="erlcrussia.com/discord"] div:first-child {
+  background: transparent !important;
+  outline: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  margin-right: 12px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+#sidebar a[href*="erlcrussia.com/discord"] svg,
+#sidebar a[href*="erlcrussia.com/discord"] svg path {
+  width: 18px !important;
+  height: 18px !important;
+  margin: 0 !important;
+  color: rgb(80, 83, 81) !important;
+  fill: rgb(80, 83, 81) !important;
+  transition: color 0.15s ease, fill 0.15s ease !important;
+}
+
+#sidebar a[href*="erlcrussia.com/discord"],
+#sidebar a[href*="erlcrussia.com/discord"] span {
+  color: rgb(80, 83, 81) !important;
+  font-size: 0.875rem !important;
+  font-weight: 700 !important;
+  transition: color 0.15s ease !important;
+}
+
+/* Hover - светлая тема */
+#sidebar a[href*="erlcrussia.com/discord"]:hover {
+  background: rgba(3, 7, 18, 0.04) !important;
+  border-color: rgba(10, 13, 12, 0.22) !important;
+}
+
+#sidebar a[href*="erlcrussia.com/discord"]:hover svg,
+#sidebar a[href*="erlcrussia.com/discord"]:hover svg path {
+  color: #000000 !important;
+  fill: #000000 !important;
+}
+
+#sidebar a[href*="erlcrussia.com/discord"]:hover,
+#sidebar a[href*="erlcrussia.com/discord"]:hover span {
+  color: #000000 !important;
+}
+
+/* Темная тема */
+.dark #sidebar a.nav-anchor[href*="erlcrussia.com/discord"],
+.dark #sidebar a[href*="erlcrussia.com/discord"] {
+  background: transparent !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+}
+
+.dark #sidebar a[href*="erlcrussia.com/discord"] svg,
+.dark #sidebar a[href*="erlcrussia.com/discord"] svg path {
+  color: rgb(206, 209, 207) !important;
+  fill: rgb(206, 209, 207) !important;
+}
+
+.dark #sidebar a[href*="erlcrussia.com/discord"],
+.dark #sidebar a[href*="erlcrussia.com/discord"] span {
+  color: rgb(206, 209, 207) !important;
+  font-weight: 700 !important;
+}
+
+/* Hover - темная тема */
+.dark #sidebar a[href*="erlcrussia.com/discord"]:hover {
+  background: rgba(255, 255, 255, 0.05) !important;
+  border-color: rgba(255, 255, 255, 0.25) !important;
+}
+
+.dark #sidebar a[href*="erlcrussia.com/discord"]:hover svg,
+.dark #sidebar a[href*="erlcrussia.com/discord"]:hover svg path {
+  color: #ffffff !important;
+  fill: #ffffff !important;
+}
+
+.dark #sidebar a[href*="erlcrussia.com/discord"]:hover,
+.dark #sidebar a[href*="erlcrussia.com/discord"]:hover span {
+  color: #ffffff !important;
+}
+
+/* Active */
+#sidebar a[href*="erlcrussia.com/discord"]:active {
+  transform: translateY(1px) !important;
+}
+
+/* ============================================
+   ДИСКОРД АНЧОР В МОБИЛЬНОМ МЕНЮ
+   ============================================ */
+
+#mobile-nav a.nav-anchor[href*="erlcrussia.com/discord"],
+#mobile-nav a[href*="erlcrussia.com/discord"] {
+  display: flex !important;
+  align-items: center !important;
+  width: 100% !important;
+  min-height: 42px !important;
+  height: 42px !important;
+  box-sizing: border-box !important;
+  padding: 0 16px !important;
+  border-radius: 12px !important;
+  text-decoration: none !important;
+  transition: all 0.15s ease !important;
+  background: transparent !important;
+  border: 1px solid rgba(10, 13, 12, 0.12) !important;
+  margin: 6px 0 12px 0 !important;
+}
+
+#mobile-nav a[href*="erlcrussia.com/discord"] div:first-child {
+  background: transparent !important;
+  outline: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  margin-right: 12px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+#mobile-nav a[href*="erlcrussia.com/discord"] svg,
+#mobile-nav a[href*="erlcrussia.com/discord"] svg path {
+  width: 18px !important;
+  height: 18px !important;
+  margin: 0 !important;
+  color: rgb(80, 83, 81) !important;
+  fill: rgb(80, 83, 81) !important;
+  transition: color 0.15s ease, fill 0.15s ease !important;
+}
+
+#mobile-nav a[href*="erlcrussia.com/discord"],
+#mobile-nav a[href*="erlcrussia.com/discord"] span {
+  color: rgb(80, 83, 81) !important;
+  font-size: 0.875rem !important;
+  font-weight: 700 !important;
+  transition: color 0.15s ease !important;
+}
+
+.dark #mobile-nav a.nav-anchor[href*="erlcrussia.com/discord"],
+.dark #mobile-nav a[href*="erlcrussia.com/discord"] {
+  border-color: rgba(255, 255, 255, 0.12) !important;
+}
+
+.dark #mobile-nav a[href*="erlcrussia.com/discord"] svg,
+.dark #mobile-nav a[href*="erlcrussia.com/discord"] svg path {
+  color: rgb(206, 209, 207) !important;
+  fill: rgb(206, 209, 207) !important;
+}
+
+.dark #mobile-nav a[href*="erlcrussia.com/discord"],
+.dark #mobile-nav a[href*="erlcrussia.com/discord"] span {
+  color: rgb(206, 209, 207) !important;
+  font-weight: 700 !important;
+}
+
+.dark #mobile-nav a[href*="erlcrussia.com/discord"]:hover {
+  background: rgba(255, 255, 255, 0.05) !important;
+  border-color: rgba(255, 255, 255, 0.25) !important;
+}
+
+.dark #mobile-nav a[href*="erlcrussia.com/discord"]:hover svg,
+.dark #mobile-nav a[href*="erlcrussia.com/discord"]:hover svg path {
+  color: #ffffff !important;
+  fill: #ffffff !important;
+}
+
+.dark #mobile-nav a[href*="erlcrussia.com/discord"]:hover,
+.dark #mobile-nav a[href*="erlcrussia.com/discord"]:hover span {
+  color: #ffffff !important;
+}
+
+/* ============================================
+   СКРЫТИЕ КНОПКИ COPY PAGE ДЛЯ /RU И /EN
+   ============================================ */
+:root:has(#no-header-here) {
+  #header {
+    display: none !important;
+  }
+
+  .prose,
+  main,
+  #content-container {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+  }
+
+  .relative.max-w-screen-xl {
+    padding-top: 0 !important;
+  }
+}
+
+#no-header-here {
+  display: none !important;
+}
+
+/* ==========================================================================
+   МЕНЮ ПОЛЬЗОВАТЕЛЯ И АВАТАР
+   ========================================================================== */
+
+
+#topbar-cta-button:has(.account-menu-container),
+#topbar-cta-button.is-authenticated {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  width: auto !important;
+  height: auto !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  overflow: visible !important;
+  position: relative !important;
+}
+
+#topbar-cta-button:has(.account-menu-container)>a,
+#topbar-cta-button.is-authenticated>a {
+  display: none !important;
+}
+
+.account-menu-container {
+  position: relative !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  overflow: visible !important;
+}
+
+.account-avatar-button {
+  position: relative !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background: transparent !important;
+  border: none !important;
+  border-radius: 50% !important;
+  padding: 0 !important;
+  cursor: pointer !important;
+  transition: transform 0.2s ease !important;
+  width: 44px !important;
+  height: 44px !important;
+  outline: none !important;
+  overflow: visible !important;
+  flex-shrink: 0 !important;
+}
+
+.account-avatar-button:hover {
+  transform: scale(1.05);
+}
+
+.account-avatar {
+  width: 100% !important;
+  height: 100% !important;
+  border-radius: 50% !important;
+  object-fit: cover !important;
+  display: block !important;
+}
+
+.account-avatar-decoration {
+  position: absolute !important;
+  top: -9.8% !important;
+  left: -9.8% !important;
+  width: 119.6% !important;
+  height: 119.6% !important;
+  max-width: none !important;
+  pointer-events: none !important;
+  user-select: none !important;
+  z-index: 1 !important;
+}
+
+.account-dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  width: 240px;
+  background: rgb(20, 20, 20);
+  border: 1px solid rgb(44, 46, 51);
+  border-radius: 12px;
+  padding: 0.75rem;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+  z-index: 99999;
+  animation: dropdown-fade 0.2s ease;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+@keyframes dropdown-fade {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.dropdown-link-roblox {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0.625rem 0.75rem;
+  background: transparent;
+  border: none;
+  color: var(--foreground-muted, #9ca3af);
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  border-radius: 10px;
+  transition: all 0.2s ease;
+  text-align: left;
+  text-decoration: none;
+  box-sizing: border-box;
+  font-family: inherit;
+}
+
+.dropdown-link-roblox:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--foreground-muted, #9ca3af);
+}
+
+.dropdown-settings-btn,
+.dropdown-dashboard-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0.625rem 0.75rem;
+  background: transparent;
+  border: none;
+  color: var(--foreground-muted, #9ca3af);
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  border-radius: 10px;
+  transition: all 0.2s ease;
+  text-align: left;
+  text-decoration: none;
+  box-sizing: border-box;
+  font-family: inherit;
+}
+
+.dropdown-settings-btn:hover,
+.dropdown-dashboard-btn:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--foreground-muted, #9ca3af);
+}
+
+.dropdown-logout-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0.625rem 0.75rem;
+  background: transparent;
+  border: none;
+  color: #ef4444;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  border-radius: 10px;
+  transition: all 0.2s ease;
+  text-align: left;
+  box-sizing: border-box;
+  font-family: inherit;
+}
+
+.dropdown-logout-btn:hover {
+  background: rgba(239, 68, 68, 0.1);
+  color: #ef4444;
+}
+
+.dropdown-link-roblox svg,
+.dropdown-settings-btn svg,
+.dropdown-dashboard-btn svg,
+.dropdown-logout-btn svg {
+  flex-shrink: 0;
+}

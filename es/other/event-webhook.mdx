@@ -1,0 +1,89 @@
+---
+title: "Event Webhook"
+---
+
+Para recibir webhooks desde el juego:
+
+1. Escribe `/webhook manage` en nuestro servidor de Discord.
+2. En el menú que aparece, especifica la URL de tu webhook **personalizado**.
+3. Antes de hacer clic en el botón "Añadir", asegúrate de hacer clic en el botón "Probar".
+   - El sistema enviará un mensaje de prueba. Si llega, todo está configurado correctamente y el webhook está listo para su uso.
+4. Tras una verificación exitosa, haz clic en el botón "Añadir" para activar la recepción de datos.
+
+<Danger>
+   **NO admitimos webhooks directos de Discord. El sistema funciona exclusivamente con webhooks personalizados (tus propios controladores/handlers).**
+</Danger>
+
+Tu endpoint debe verificar las firmas Ed25519 en cada solicitud. El juego solo guardará las URLs que superen la verificación.
+
+---
+
+### Requisitos
+
+#### Tu endpoint debe aceptar:
+
+* Solicitudes `POST` con un cuerpo JSON.
+* Estos encabezados en cada solicitud firmada:
+  * `X-Signature-Ed25519` (firma Ed25519 codificada en hexadecimal).
+  * `X-Signature-Timestamp` (cadena con la marca de tiempo Unix).
+
+#### Tu Endpoint Debe:
+
+1. Leer los **bytes sin procesar (raw bytes) del cuerpo de la solicitud** exactamente como se recibieron (no vuelvas a serializar el JSON).
+2. Leer `X-Signature-Timestamp`.
+3. Leer `X-Signature-Ed25519`.
+4. Verificar la firma para:
+
+   `message = timestamp + raw_body`
+
+   Donde `timestamp` es el valor del encabezado como cadena, concatenado directamente con los bytes del cuerpo sin procesar.
+5. Devolver:
+   * **2xx** solo si la firma es válida.
+   * **4xx** si faltan encabezados, no son válidos o si la verificación de la firma falla.
+
+---
+
+### Clave Pública
+
+Usa esta clave pública Ed25519 (base64, SubjectPublicKeyInfo / SPKI):
+
+```
+MCowBQYDK2VwAyEArbRTkyh3A035YUWWZdyF3vck4QN3I7uU8cp7YaxocFE=
+```
+
+---
+
+### Detalles de Implementación
+
+#### Datos de Entrada
+
+* `timestamp`: cadena exacta de `X-Signature-Timestamp`.
+* `sigHex`: cadena exacta de `X-Signature-Ed25519` (hexadecimal).
+* `rawBody`: bytes sin procesar del cuerpo de la solicitud.
+
+#### Pasos
+
+1. Decodificar `sigHex` de hexadecimal a bytes.
+2. Construir `message` como:
+   * Bytes de `timestamp` en UTF-8
+   * Seguidos inmediatamente por `rawBody`
+3. Verificar la firma Ed25519 usando la clave pública anterior.
+
+#### Errores Comunes
+
+* No uses un objeto JSON analizado (parsed) para la verificación. Utiliza únicamente los bytes del cuerpo sin procesar.
+* No agregues separadores ni espacios entre la marca de tiempo y el cuerpo.
+* Trata la firma como hexadecimal, no como base64.
+* Asegúrate de que tu framework no consuma el cuerpo antes de capturarlo.
+
+---
+
+### ¿Qué eventos se envían?
+
+Actualmente, el juego envía webhooks para:
+
+* Mensajes que comienzan con **;**
+  * ¡Esto permite crear comandos personalizados dentro del juego!
+* Llamadas de emergencia
+
+Es posible que se agreguen nuevos eventos en el futuro. Nota: el sistema de webhooks no está diseñado para reemplazar las consultas a la API HTTP ni los WebSockets.

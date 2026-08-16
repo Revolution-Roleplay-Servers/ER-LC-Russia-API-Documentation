@@ -1,0 +1,83 @@
+---
+title: "Limiti di Richiesta"
+description: "L'API di ER:LC Russia utilizza limiti sulla frequenza delle richieste (rate limit) per proteggere i server dal sovraccarico e garantire un funzionamento stabile per tutti. Comprendere il funzionamento di questi limiti e gestirli correttamente è essenziale per costruire un'integrazione affidabile."
+---
+
+## Tabella dei Limiti
+
+| Endpoint | Limite | Descrizione |
+| --------- | ----- | -------- |
+| `/v1/*` | **120 richieste/min** | Tutti gli endpoint API V1 |
+| `/v2/*` | **120 richieste/min** | Tutti gli endpoint API V2 |
+| `/v1/*/stats/*` | **20 richieste/min** | API Statistiche V1 |
+| `/v2/*/stats/*` | **40/120 richieste/min** | API Statistiche V2 (senza token / con token) |
+
+### Esempio di Risposta per Superamento del Limite
+
+```json
+{
+  "code": 5016,
+  "message": "Rate Limit Exceeded",
+  "retry_after": 45,
+  "details": {
+    "limit": 120,
+    "count": 125,
+    "excess": 5,
+    "reset_at": 1740339600000
+  }
+}
+```
+
+## Header di Rate Limit
+
+L'API restituisce gli header informativi sui limiti di frequenza in **ogni risposta**:
+
+| Header | Valore di Esempio | Descrizione |
+| --------- | --------------- | -------- |
+| `X-RateLimit-Limit` | 120 | Numero massimo di richieste al minuto |
+| `X-RateLimit-Remaining` | 115 | Numero di richieste rimanenti prima del reset |
+| `X-RateLimit-Reset` | _Timestamp Unix_ | Orario (ms) in cui il limite verrà reimpostato |
+| `Retry-After` | 45 | Secondi fino al reset del limite (solo in caso di errore 429) |
+
+<Tip>
+  Utilizza sempre gli header di rate limit restituiti in ciascuna risposta per regolare dinamicamente la frequenza delle richieste. **Non inserire valori fissi (hardcoded) nel tuo codice: possono variare e dipendere dal servizio specifico.**
+</Tip>
+
+
+## Coda dei Comandi
+
+Gli endpoint `*/command` utilizzano un sistema a coda:
+
+- **Dimensione massima della coda:** 100 comandi
+- **Intervallo di esecuzione:** 1 comando ogni 5 secondi
+
+Quando la coda è piena, riceverai:
+
+```json
+{
+  "code": 5015,
+  "message": "Command Queue Full"
+}
+```
+
+## Protezione Anti-Spam
+
+Dopo aver superato il limite, il contatore **non si arresta**, ma continua a conteggiare le **richieste in eccesso**.
+
+Al raggiungimento di **400 richieste in eccesso**, viene applicato un **blocco di 5 minuti**. Se lo spam continua, la durata del blocco aumenterà.
+<Tip>
+  **API Statistiche V2:** Utilizza un token per aumentare il limite da 40 a 120 richieste/min. Passa il token tramite l'header `Authorization: Bearer <token>`.
+</Tip>
+
+## Violazioni Ripetute
+
+Le applicazioni che continuano a inviare richieste dopo aver ricevuto risposte `429` possono essere bloccate per periodi progressivamente più lunghi.
+
+<Danger>
+  Le applicazioni che violano sistematicamente i limiti di frequenza verranno **bloccate tramite Cloudflare**. Se visualizzi una pagina di blocco di Cloudflare, dovrai contattarci aprendo un ticket API sul server Discord di ER:LC Russia per richiedere lo sblocco.
+</Danger>
+
+
+## Hosting con IP Condiviso
+
+L'API di ER:LC Russia non supporta BotGhost e servizi di hosting simili che utilizzano indirizzi IP condivisi. Quando molte applicazioni diverse operano dallo stesso IP, raggiungono costantemente i limiti di frequenza a vicenda e non è possibile risolvere questo problema. Per un accesso stabile all'API, ospita il tuo servizio su un IP dedicato.

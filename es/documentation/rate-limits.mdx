@@ -1,0 +1,83 @@
+---
+title: "Límites de Solicitudes (Rate Limits)"
+description: "La API de ER:LC Rusia utiliza límites de frecuencia de solicitudes para proteger nuestros servidores de la sobrecarga y garantizar un funcionamiento estable para todos. Comprender cómo funcionan estos límites y cómo manejarlos adecuadamente es fundamental para crear una integración confiable."
+---
+
+## Tabla de Límites
+
+| Endpoints | Límite | Descripción |
+| --------- | ----- | -------- |
+| `/v1/*` | **120 solicitudes/min** | Todos los endpoints de la API V1 |
+| `/v2/*` | **120 solicitudes/min** | Todos los endpoints de la API V2 |
+| `/v1/*/stats/*` | **20 solicitudes/min** | API de Estadísticas V1 |
+| `/v2/*/stats/*` | **40/120 solicitudes/min** | API de Estadísticas V2 (sin token / con token) |
+
+### Ejemplo de Respuesta al Exceder el Límite
+
+```json
+{
+  "code": 5016,
+  "message": "Rate Limit Exceeded",
+  "retry_after": 45,
+  "details": {
+    "limit": 120,
+    "count": 125,
+    "excess": 5,
+    "reset_at": 1740339600000
+  }
+}
+```
+
+## Encabezados de Rate Limit
+
+La API devuelve encabezados con información del límite de solicitudes en **cada respuesta**:
+
+| Encabezado | Valor de Ejemplo | Descripción |
+| --------- | --------------- | -------- |
+| `X-RateLimit-Limit` | 120 | Número máximo de solicitudes por minuto |
+| `X-RateLimit-Remaining` | 115 | Número de solicitudes restantes antes del reinicio |
+| `X-RateLimit-Reset` | _Marca de tiempo Unix_ | Momento (ms) en el que se reiniciará el límite |
+| `Retry-After` | 45 | Segundos hasta el reinicio del límite (solo en error 429) |
+
+<Tip>
+  Utiliza siempre los encabezados de límite de frecuencia devueltos en cada respuesta para ajustar dinámicamente la frecuencia de tus solicitudes. **No codifiques valores de límite fijos en tu código; pueden cambiar y variar según el servicio.**
+</Tip>
+
+
+## Cola de Comandos
+
+Los endpoints `*/command` utilizan un sistema de cola:
+
+- **Tamaño máximo de cola:** 100 comandos
+- **Intervalo de ejecución:** 1 comando cada 5 segundos
+
+Cuando la cola esté llena, recibirás:
+
+```json
+{
+  "code": 5015,
+  "message": "Command Queue Full"
+}
+```
+
+## Protección Anti-Spam
+
+Tras superar el límite, el contador **no se detiene**, sino que continúa contabilizando las **solicitudes en exceso**.
+
+Al alcanzar **400 solicitudes en exceso**, se aplica un **bloqueo de 5 minutos**. Si el spam continúa, la duración del bloqueo aumenta.
+<Tip>
+  **API de Estadísticas V2:** Utiliza un token para aumentar el límite de 40 a 120 solicitudes/min. Envía el token mediante el encabezado `Authorization: Bearer <token>`.
+</Tip>
+
+## Infractores Reincidentes
+
+Las aplicaciones que sigan enviando solicitudes tras recibir respuestas `429` podrán ser bloqueadas por períodos cada vez mayores.
+
+<Danger>
+  Las aplicaciones que violen sistemáticamente los límites de solicitudes serán **bloqueadas a través de Cloudflare**. Si encuentras una página de bloqueo de Cloudflare, debes contactarnos abriendo un ticket de API en el servidor de Discord de ER:LC para levantar el bloqueo.
+</Danger>
+
+
+## Alojamientos con IP Compartida
+
+La API de ER:LC Rusia no es compatible con BotGhost ni alojamientos similares con direcciones IP compartidas. Cuando muchas aplicaciones diferentes se ejecutan bajo una misma IP, alcanzan constantemente los límites de solicitudes de las demás y no hay forma de resolver este problema. Para un acceso estable a la API, aloja tu servicio en una IP dedicada.

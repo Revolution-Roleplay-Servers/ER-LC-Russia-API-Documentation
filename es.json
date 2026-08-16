@@ -1,0 +1,283 @@
+{
+  "language": "es",
+  "tabs": [
+    {
+      "tab": "Información y Reglas",
+      "icon": "circle-info",
+      "pages": [
+        "es/index",
+        {
+          "group": "Primeros Pasos",
+          "icon": "rocket",
+          "pages": [
+            "es/introduction",
+            "es/api-clients"
+          ]
+        },
+        {
+          "group": "Documentación",
+          "icon": "book-open",
+          "pages": [
+            "es/documentation/erlc-location-information",
+            "es/documentation/rate-limits",
+            "es/documentation/error-codes"
+          ]
+        },
+        {
+          "group": "Políticas",
+          "icon": "scale-balanced",
+          "pages": [
+            "es/policies/api-use-guidelines"
+          ]
+        }
+      ]
+    },
+    {
+      "tab": "Documentación de la API",
+      "icon": "code",
+      "versions": [
+        {
+          "version": "API V1",
+          "pages": [
+            {
+              "group": "Documentación de la API V1",
+              "icon": "file-code",
+              "pages": [
+                {
+                  "group": "ER:LC API V1",
+                  "icon": "gamepad",
+                  "pages": [
+                    "es/api-reference/api-v1/erlc-api-v1/get-erlc-server-bans",
+                    "es/api-reference/api-v1/erlc-api-v1/get-erlc-server",
+                    "es/api-reference/api-v1/erlc-api-v1/get-erlc-server-players",
+                    "es/api-reference/api-v1/erlc-api-v1/get-erlc-server-joinlogs",
+                    "es/api-reference/api-v1/erlc-api-v1/get-erlc-server-queue",
+                    "es/api-reference/api-v1/erlc-api-v1/get-erlc-server-killlogs",
+                    "es/api-reference/api-v1/erlc-api-v1/get-erlc-server-commandlogs",
+                    "es/api-reference/api-v1/erlc-api-v1/get-erlc-server-modcalls",
+                    "es/api-reference/api-v1/erlc-api-v1/get-erlc-server-vehicles",
+                    "es/api-reference/api-v1/erlc-api-v1/get-erlc-server-staff",
+                    "es/api-reference/api-v1/erlc-api-v1/post-erlc-server-command"
+                  ]
+                },
+                {
+                  "group": "MRP API de Estadísticas V1",
+                  "icon": "chart-bar",
+                  "pages": [
+                    "es/api-reference/api-v1/mrp-stats-api-v1/get-moscowroleplay-stats-playercount",
+                    "es/api-reference/api-v1/mrp-stats-api-v1/get-moscowroleplay-stats-server-membercount",
+                    "es/api-reference/api-v1/mrp-stats-api-v1/get-moscowroleplay-stats-server-allmembercount",
+                    "es/api-reference/api-v1/mrp-stats-api-v1/get-moscowroleplay-stats-server-botcount"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "version": "API V2",
+          "default": true,
+          "pages": [
+            {
+              "group": "Documentación de la API V2",
+              "icon": "file-code",
+              "pages": [
+                {
+                  "group": "ER:LC API V2",
+                  "icon": "gamepad",
+                  "pages": [
+                    "es/api-reference/api-v2/erlc-api-v2/get-erlc-server",
+                    "es/api-reference/api-v2/erlc-api-v2/post-erlc-server-command"
+                  ]
+                },
+                {
+                  "group": "MRP API de Economía V2",
+                  "icon": "coins",
+                  "pages": [
+                    {
+                      "group": "Endpoints GET de la API de Economía",
+                      "icon": "arrow-down",
+                      "pages": [
+                        "es/api-reference/api-v2/mrp-civops-api-v2/mrp-get-endpoints-civops-api-v2/get-moscowroleplay-civops-economy",
+                        "es/api-reference/api-v2/mrp-civops-api-v2/mrp-get-endpoints-civops-api-v2/get-moscowroleplay-civops-users",
+                        "es/api-reference/api-v2/mrp-civops-api-v2/mrp-get-endpoints-civops-api-v2/get-moscowroleplay-civops-businesses",
+                        "es/api-reference/api-v2/mrp-civops-api-v2/mrp-get-endpoints-civops-api-v2/get-moscowroleplay-civops-mafias",
+                        "es/api-reference/api-v2/mrp-civops-api-v2/mrp-get-endpoints-civops-api-v2/get-moscowroleplay-civops-government",
+                        "es/api-reference/api-v2/mrp-civops-api-v2/mrp-get-endpoints-civops-api-v2/get-moscowroleplay-civops-store",
+                        "es/api-reference/api-v2/mrp-civops-api-v2/mrp-get-endpoints-civops-api-v2/get-moscowroleplay-civops-ads",
+                        "es/api-reference/api-v2/mrp-civops-api-v2/mrp-get-endpoints-civops-api-v2/get-moscowroleplay-civops-system",
+                        "es/api-reference/api-v2/mrp-civops-api-v2/mrp-get-endpoints-civops-api-v2/get-moscowroleplay-civops-health"
+                      ]
+                    },
+                    {
+                      "group": "Endpoints POST de la API de Economía",
+                      "icon": "arrow-up",
+                      "pages": [
+                        "es/api-reference/api-v2/mrp-civops-api-v2/mrp-post-endpoints-civops-api-v2/post-moscowroleplay-civops-economy",
+                        "es/api-reference/api-v2/mrp-civops-api-v2/mrp-post-endpoints-civops-api-v2/post-moscowroleplay-civops-users",
+                        "es/api-reference/api-v2/mrp-civops-api-v2/mrp-post-endpoints-civops-api-v2/post-moscowroleplay-civops-businesses",
+                        "es/api-reference/api-v2/mrp-civops-api-v2/mrp-post-endpoints-civops-api-v2/post-moscowroleplay-civops-mafias",
+                        "es/api-reference/api-v2/mrp-civops-api-v2/mrp-post-endpoints-civops-api-v2/post-moscowroleplay-civops-government",
+                        "es/api-reference/api-v2/mrp-civops-api-v2/mrp-post-endpoints-civops-api-v2/post-moscowroleplay-civops-store",
+                        "es/api-reference/api-v2/mrp-civops-api-v2/mrp-post-endpoints-civops-api-v2/post-moscowroleplay-civops-ads"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "group": "MRP API de Estadísticas V2",
+                  "icon": "chart-bar",
+                  "pages": [
+                    "es/api-reference/api-v2/mrp-stats-api-v2/get-moscowroleplay-stats"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "tab": "Otras Opciones de Integración",
+      "icon": "puzzle-piece",
+      "pages": [
+        {
+          "group": "Integraciones",
+          "icon": "plug",
+          "pages": [
+            "es/other/websocket-gateway",
+            "es/other/event-webhook"
+          ]
+        }
+      ]
+    },
+    {
+      "tab": "Tutoriales",
+      "icon": "book-open",
+      "pages": [
+        {
+          "group": "Inicio Rápido",
+          "icon": "rocket",
+          "pages": [
+            "es/tutorials/how-to-get-api-key"
+          ]
+        }
+      ]
+    },
+    {
+      "tab": "Características de la Documentación",
+      "icon": "clipboard-list",
+      "pages": [
+        {
+          "group": "Herramientas de Desarrollador",
+          "icon": "terminal",
+          "pages": [
+            "es/docs-features/mcp-server"
+          ]
+        }
+      ]
+    }
+  ],
+  "footer": {
+    "socials": {
+      "discord": "https://erlcrussia.com/discord",
+      "x": "https://erlcrussia.com/x",
+      "telegram": "https://erlcrussia.com/telegram",
+      "youtube": "https://erlcrussia.com/youtube",
+      "instagram": "https://erlcrussia.com/tiktok",
+      "linkedin": "https://erlcrussia.com/roblox"
+    },
+    "links": [
+      {
+        "header": " ",
+        "items": [
+          {
+            "label": " ",
+            "href": "https://erlcrussia.com/privacy"
+          },
+          {
+            "label": " ",
+            "href": "https://erlcrussia.com/terms"
+          }
+        ]
+      },
+      {
+        "header": "ER:LC Rusia",
+        "items": [
+          {
+            "label": "Wiki",
+            "href": "https://wiki.erlcrussia.com/es"
+          },
+          {
+            "label": "Historial de Cambios",
+            "href": "https://wiki.erlcrussia.com/es/changelogs"
+          },
+          {
+            "label": "Reglas del Personal",
+            "href": "https://wiki.erlcrussia.com/es/staff-rules"
+          },
+          {
+            "label": "Comenzar a Jugar",
+            "href": "https://wiki.erlcrussia.com/es/guides"
+          },
+          {
+            "label": "API",
+            "href": "/"
+          },
+          {
+            "label": "Estado",
+            "href": "https://status.erlcrussia.com"
+          }
+        ]
+      },
+      {
+        "header": "Productos",
+        "items": [
+          {
+            "label": "Tienda",
+            "href": "https://erlcrussia.com/store"
+          },
+          {
+            "label": "Moscow RolePlay",
+            "href": "https://erlcrussia.com/moscowroleplay"
+          }
+        ]
+      },
+      {
+        "header": "Legal",
+        "items": [
+          {
+            "label": "Privacidad",
+            "href": "https://erlcrussia.com/privacy"
+          },
+          {
+            "label": "Términos",
+            "href": "https://erlcrussia.com/terms"
+          }
+        ]
+      }
+    ]
+  },
+  "navbar": {
+    "links": [
+      {
+        "label": "Soporte",
+        "href": "https://erlcrussia.com/discord"
+      }
+    ],
+    "primary": {
+      "type": "button",
+      "label": "Iniciar sesión",
+      "href": "https://erlcrussia.com/login"
+    }
+  },
+  "global": {
+    "anchors": [
+      {
+        "anchor": "Nuestro Discord",
+        "icon": "discord",
+        "href": "https://erlcrussia.com/discord"
+      }
+    ]
+  }
+}

@@ -180,12 +180,12 @@
   ],
   "footer": {
     "socials": {
-      "discord": "https://discord.gg/MoscowRus",
-      "x": "https://x.com/erlcrussia",
-      "telegram": "https://t.me/erlcrussia",
-      "youtube": "https://www.youtube.com/@erlcrussia",
-      "instagram": "https://www.tiktok.com/@erlcrussia",
-      "linkedin": "https://www.roblox.com/share/g/688514761"
+      "discord": "https://erlcrussia.com/discord",
+      "x": "https://erlcrussia.com/x",
+      "telegram": "https://erlcrussia.com/telegram",
+      "youtube": "https://erlcrussia.com/youtube",
+      "instagram": "https://erlcrussia.com/tiktok",
+      "linkedin": "https://erlcrussia.com/roblox"
     },
     "links": [
       {
@@ -261,13 +261,13 @@
   "navbar": {
     "links": [
       {
-        "label": "API Поддержка",
-        "href": "https://discord.gg/MoscowRus"
+        "label": "Поддержка",
+        "href": "https://erlcrussia.com/discord"
       }
     ],
     "primary": {
       "type": "button",
-      "label": "Вход",
+      "label": "Войти",
       "href": "https://erlcrussia.com/login"
     }
   },
@@ -276,7 +276,7 @@
       {
         "anchor": "Наш Discord",
         "icon": "discord",
-        "href": "https://discord.gg/MoscowRus"
+        "href": "https://erlcrussia.com/discord"
       }
     ]
   }
